@@ -102,11 +102,18 @@ const PatientDashboard = () => {
                 animate="visible"
             >
                 {/* Header */}
-                <motion.header variants={slideUpVariants} style={{ marginBottom: '2rem' }}>
-                    <h1 className="gradient-text" style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '0.2rem', letterSpacing: '-1px' }}>
+                <motion.header variants={slideUpVariants} style={{ marginBottom: window.innerWidth < 768 ? '1.5rem' : '2rem' }}>
+                    <h1 className="gradient-text" style={{
+                        fontSize: window.innerWidth < 768 ? '2.2rem' : '3rem',
+                        fontWeight: '800',
+                        marginBottom: '0.2rem',
+                        letterSpacing: '-1px'
+                    }}>
                         Patient Workspace
                     </h1>
-                    <p style={{ color: 'var(--text-secondary)' }}>Welcome, {user.name}. Schedule your next visit below.</p>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: window.innerWidth < 768 ? '0.85rem' : '1rem' }}>
+                        Welcome, {user.name}. Schedule your next visit below.
+                    </p>
                 </motion.header>
 
                 {/* Booking Confirmation Toast */}
@@ -120,7 +127,7 @@ const PatientDashboard = () => {
                             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                             style={{
                                 marginBottom: '2rem',
-                                padding: '2rem 2.5rem',
+                                padding: window.innerWidth < 768 ? '1.5rem' : '2rem 2.5rem',
                                 background: 'rgba(34, 197, 94, 0.05)',
                                 backdropFilter: 'blur(12px)',
                                 WebkitBackdropFilter: 'blur(12px)',
@@ -128,7 +135,7 @@ const PatientDashboard = () => {
                                 borderRadius: '20px',
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '2rem',
+                                gap: window.innerWidth < 768 ? '1.2rem' : '2rem',
                                 flexWrap: 'wrap',
                                 position: 'relative',
                             }}
@@ -138,10 +145,12 @@ const PatientDashboard = () => {
                                 animate={{ scale: 1, rotate: 0 }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 20, delay: 0.15 }}
                                 style={{
-                                    width: '56px', height: '56px', borderRadius: '50%',
+                                    width: window.innerWidth < 768 ? '44px' : '56px',
+                                    height: window.innerWidth < 768 ? '44px' : '56px',
+                                    borderRadius: '50%',
                                     background: 'rgba(34,197,94,0.1)', border: '2px solid rgba(34,197,94,0.5)',
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    flexShrink: 0, fontSize: '1.6rem'
+                                    flexShrink: 0, fontSize: window.innerWidth < 768 ? '1.2rem' : '1.6rem'
                                 }}
                             >✓</motion.div>
                             <div style={{ flex: 1 }}>
@@ -168,7 +177,7 @@ const PatientDashboard = () => {
                         className="flex-item-side"
                         style={{
                             ...glass,
-                            padding: '2.5rem',
+                            padding: window.innerWidth < 768 ? '1.5rem' : '2.5rem',
                             height: 'fit-content',
                             overflow: 'visible',
                         }}
@@ -297,7 +306,7 @@ const PatientDashboard = () => {
                                             transition={{ type: 'spring', stiffness: 300, damping: 22 }}
                                             style={{
                                                 ...glass,
-                                                padding: '1.6rem',
+                                                padding: window.innerWidth < 768 ? '1.1rem' : '1.6rem',
                                                 display: 'flex',
                                                 justifyContent: 'space-between',
                                                 alignItems: 'center',
@@ -312,12 +321,12 @@ const PatientDashboard = () => {
                                                         background: 'rgba(99, 102, 241, 0.1)',
                                                         backdropFilter: 'blur(8px)',
                                                         WebkitBackdropFilter: 'blur(8px)',
-                                                        padding: '10px',
-                                                        borderRadius: '12px',
+                                                        padding: window.innerWidth < 768 ? '8px' : '10px',
+                                                        borderRadius: '10px',
                                                         border: '1px solid rgba(99,102,241,0.15)'
                                                     }}
                                                 >
-                                                    <Stethoscope size={22} color="var(--primary)" />
+                                                    <Stethoscope size={window.innerWidth < 768 ? 18 : 22} color="var(--primary)" />
                                                 </motion.div>
                                                 <div>
                                                     <h4 style={{ color: 'var(--text-primary)', fontSize: '1rem', marginBottom: '0.3rem' }}>{app.department}</h4>

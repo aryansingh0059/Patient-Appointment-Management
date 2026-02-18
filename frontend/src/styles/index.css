@@ -142,35 +142,60 @@ label {
 /* Responsive Layout Utilities */
 .dashboard-container {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 40px;
+  max-width: 1400px;
+  margin: 0 auto;
   padding-bottom: 4rem;
   contain: layout style;
 }
 
 .flex-responsive {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
   flex-wrap: wrap;
 }
 
 .flex-item-side {
   flex: 1;
-  min-width: 350px;
+  min-width: 320px;
 }
 
 .flex-item-main {
   flex: 2;
-  min-width: 450px;
+  min-width: 320px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .flex-responsive {
     flex-direction: column;
+    gap: 2rem;
   }
 
   .flex-item-side,
   .flex-item-main {
     width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0 16px 3rem 16px;
+  }
+
+  .glass-card {
+    border-radius: 20px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  input,
+  select {
+    padding: 12px 14px;
+    margin-bottom: 16px;
   }
 }
 

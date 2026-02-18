@@ -46,17 +46,17 @@ const Login = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    style={{ textAlign: 'center', marginBottom: '2rem' }}
+                    style={{ textAlign: 'center', marginBottom: window.innerWidth < 768 ? '1.5rem' : '2rem' }}
                 >
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '0.5rem' }}>
-                        <span style={{ fontSize: '2rem' }}>☤</span>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '0.4rem' }}>
+                        <span style={{ fontSize: window.innerWidth < 768 ? '1.6rem' : '2rem' }}>☤</span>
                         <span style={{
-                            fontSize: '1.6rem', fontWeight: '800',
+                            fontSize: window.innerWidth < 768 ? '1.3rem' : '1.6rem', fontWeight: '800',
                             background: 'linear-gradient(135deg, #fff 0%, #a5b4fc 100%)',
                             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
                         }}>QuickCure</span>
                     </div>
-                    <p style={{ color: 'rgba(148,163,184,0.6)', fontSize: '0.82rem', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+                    <p style={{ color: 'rgba(148,163,184,0.6)', fontSize: window.innerWidth < 768 ? '0.7rem' : '0.82rem', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
                         Trusted Healthcare Platform
                     </p>
                 </motion.div>
@@ -70,15 +70,15 @@ const Login = () => {
                         background: 'rgba(255,255,255,0.04)',
                         backdropFilter: 'blur(24px)',
                         WebkitBackdropFilter: 'blur(24px)',
-                        border: '1px solid rgba(255,255,255,0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '28px',
-                        padding: '2.8rem',
+                        padding: window.innerWidth < 768 ? '1.8rem' : '2.8rem',
                         boxShadow: '0 32px 80px rgba(0,0,0,0.4)',
                     }}
                 >
                     {/* Header */}
-                    <div style={{ marginBottom: '2rem' }}>
-                        <h2 style={{ fontSize: '1.9rem', fontWeight: '800', color: 'white', marginBottom: '0.4rem' }}>
+                    <div style={{ marginBottom: window.innerWidth < 768 ? '1.5rem' : '2rem' }}>
+                        <h2 style={{ fontSize: window.innerWidth < 768 ? '1.6rem' : '1.9rem', fontWeight: '800', color: 'white', marginBottom: '0.4rem' }}>
                             Welcome Back 👋
                         </h2>
                         <p style={{ color: 'rgba(148,163,184,0.7)', fontSize: '0.9rem' }}>
