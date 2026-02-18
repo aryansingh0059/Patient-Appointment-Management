@@ -55,19 +55,19 @@ const PatientDashboard = () => {
         timeSlot: ''
     });
 
+    const fetchAppointments = useCallback(async () => {
+        try {
+            const config = { headers: { Authorization: `Bearer ${user.token}` } };
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/appointments`, config);
+            setAppointments(data);
+        } catch (err) { console.error(err); }
+    }, [user.token]);
+
     useEffect(() => { fetchAppointments(); }, [fetchAppointments]);
 
     const handleDepartmentChange = useCallback((dept) => {
         setFormData(prev => ({ ...prev, department: dept, doctorName: DEPARTMENT_DOCTORS[dept][0] }));
     }, []);
-
-    const fetchAppointments = useCallback(async () => {
-        try {
-            const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            const { data } = await axios.get('http://localhost:5000/api/appointments', config);
-            setAppointments(data);
-        } catch (err) { console.error(err); }
-    }, [user.token]);
 
     const handleBook = async (e) => {
         e.preventDefault();
@@ -75,7 +75,7 @@ const PatientDashboard = () => {
         setIsSubmitting(true);
         try {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            const { data } = await axios.post('http://localhost:5000/api/appointments', { ...formData, patientName: user.name }, config);
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/appointments`, { ...formData, patientName: user.name }, config);
             // Reset time slot so the button becomes disabled and form is fresh
             setFormData(prev => ({ ...prev, timeSlot: '' }));
             fetchAppointments();
@@ -170,6 +170,7 @@ const PatientDashboard = () => {
                             ...glass,
                             padding: '2.5rem',
                             height: 'fit-content',
+                            overflow: 'visible',
                         }}
                     >
                         <h3 className="gradient-text" style={{ fontSize: '1.5rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -202,6 +203,13 @@ const PatientDashboard = () => {
                             </select>
 
                             <div>
+                                <label>Time Slot</label>
+                                <TimeSlotPicker
+                                    value={formData.timeSlot}
+                                    onChange={(slot) => setFormData({ ...formData, timeSlot: slot })}
+                                />
+                            </div>
+                            <div>
                                 <label>Preferred Date</label>
                                 <input
                                     type="date"
@@ -210,13 +218,6 @@ const PatientDashboard = () => {
                                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                                     required
                                     style={{ background: 'rgba(255,255,255,0.05)', marginBottom: '20px' }}
-                                />
-                            </div>
-                            <div>
-                                <label>Time Slot</label>
-                                <TimeSlotPicker
-                                    value={formData.timeSlot}
-                                    onChange={(slot) => setFormData({ ...formData, timeSlot: slot })}
                                 />
                             </div>
 

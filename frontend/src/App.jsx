@@ -28,7 +28,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Navbar />
-          <main style={{ flex: 1, width: '100%' }}>
+          <main style={{ width: '100%' }}>
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

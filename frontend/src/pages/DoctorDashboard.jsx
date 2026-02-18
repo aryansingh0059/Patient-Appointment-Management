@@ -15,7 +15,7 @@ const DoctorDashboard = () => {
     const fetchAppointments = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            const { data } = await axios.get('http://localhost:5000/api/appointments', config);
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/appointments`, config);
             setAppointments(data);
         } catch (err) {
             console.error(err);
@@ -25,7 +25,7 @@ const DoctorDashboard = () => {
     const updateStatus = async (id, status) => {
         try {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            await axios.put(`http://localhost:5000/api/appointments/${id}`, { status }, config);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/appointments/${id}`, { status }, config);
             fetchAppointments();
         } catch (err) {
             alert('Update failed');

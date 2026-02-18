@@ -76,7 +76,7 @@ const SplashScreen = ({ onComplete }) => {
 
                             {/* ECG path */}
                             <motion.polyline
-                                points="0,50 60,50 70,50 75,20 80,80 85,10 90,70 95,50 110,50 120,50 125,30 128,60 131,50 160,50 220,50"
+                                points={ECG_PATH.replace('M', '').replace(/L/g, ' ')}
                                 fill="none"
                                 stroke="url(#ecgGradient)"
                                 strokeWidth="2.5"
