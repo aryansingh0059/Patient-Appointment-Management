@@ -2,7 +2,6 @@
 
 QuickCure is a modern, high-performance appointment management platform designed with a premium "Glassmorphism" aesthetic. It provides a seamless interface for patients to book appointments and for doctors to manage their schedules efficiently.
 
-[![QuickCure Preview](https://via.placeholder.com/1200x600/070b14/6366f1?text=QuickCure+Premium+Healthcare+Dashboard)](https://patient-appointment-management-blue.vercel.app)
 
 ## ✨ Premium Features
 
