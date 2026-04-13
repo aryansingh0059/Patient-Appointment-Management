@@ -134,7 +134,7 @@ const DoctorDashboard = () => {
                         <motion.button
                             onClick={fetchAppointments}
                             whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95, rotate: 180 }}
+                            whileTap={{ scale: 0.95 }}
                             style={{
                                 display: 'flex', alignItems: 'center', gap: '6px',
                                 background: 'rgba(99,102,241,0.12)', color: 'var(--primary)',

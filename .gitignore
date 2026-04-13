@@ -9,6 +9,7 @@ frontend/.vite/
 
 # Environment variables (NEVER commit these)
 backend/.env
+frontend/.env
 .env
 .env.local
 .env.production

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, AuthContext } from './context/AuthContext';
 import './styles/index.css';
 
 import Login from './pages/Login';
@@ -13,6 +13,13 @@ import DoctorAppointments from './pages/DoctorAppointments';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import SplashScreen from './components/SplashScreen';
+import AIChatbot from './components/AIChatbot';
+
+// Only renders the chatbot for logged-in patients (not doctors or admins)
+const AuthenticatedChatbot = () => {
+  const { user } = useContext(AuthContext);
+  return user && user.role === 'patient' ? <AIChatbot /> : null;
+};
 
 function App() {
   const [showSplash, setShowSplash] = useState(() => {
@@ -62,6 +69,7 @@ function App() {
               <Route path="/" element={<Navigate to="/login" />} />
             </Routes>
           </main>
+          <AuthenticatedChatbot />
         </Router>
       </AuthProvider>
     </>

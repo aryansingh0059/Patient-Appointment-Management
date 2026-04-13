@@ -14,6 +14,7 @@ const DEPARTMENT_DOCTORS = {
     Dermatology: ['Dr. Ritu Agarwal', 'Dr. Manish Khanna', 'Dr. Swati Rao', 'Dr. Deepak Tiwari'],
     Endocrinology: ['Dr. Shreya Nair', 'Dr. Arun Pillai', 'Dr. Lakshmi Iyer', 'Dr. Harsh Bose'],
     Gastroenterology: ['Dr. Amit Desai', 'Dr. Priyanka Mehta', 'Dr. Rajiv Nair', 'Dr. Sunita Patel'],
+    Ophthalmology: ['Dr. Naina Verma', 'Dr. Sameer Joshi', 'Dr. Preethi Rao', 'Dr. Aditya Kulkarni'],
 };
 
 const TIME_SLOTS = [
@@ -27,7 +28,7 @@ const getTodayDate = () => new Date().toISOString().split('T')[0];
 
 const DEPT_ICONS = {
     Cardiology: '❤️', Neurology: '🧠', Orthopedics: '🦴', General: '🩺',
-    Dermatology: '✨', Endocrinology: '⚗️', Gastroenterology: '🫁',
+    Dermatology: '✨', Endocrinology: '⚗️', Gastroenterology: '🫁', Ophthalmology: '👁️',
 };
 
 const DR_ICONS = ['👨‍⚕️', '👩‍⚕️', '🧑‍⚕️'];
