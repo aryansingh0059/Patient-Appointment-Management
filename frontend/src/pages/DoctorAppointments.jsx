@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { useSocket } from '../context/SocketContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 import HospitalBackground from '../components/HospitalBackground';
@@ -70,6 +71,24 @@ const DoctorAppointments = () => {
     }, [user.token]);
 
     useEffect(() => { fetchAppointments(); }, [fetchAppointments]);
+
+    const { socket } = useSocket();
+
+    useEffect(() => {
+        if (!socket) return;
+
+        const handleRefresh = () => {
+            fetchAppointments();
+        };
+
+        socket.on('appointment_booked', handleRefresh);
+        socket.on('appointment_status_changed', handleRefresh);
+
+        return () => {
+            socket.off('appointment_booked', handleRefresh);
+            socket.off('appointment_status_changed', handleRefresh);
+        };
+    }, [socket, fetchAppointments]);
 
     const updateStatus = async (id, status) => {
         try {

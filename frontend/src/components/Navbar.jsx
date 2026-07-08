@@ -2,6 +2,7 @@ import React, { useContext, useCallback, memo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { LogOut } from 'lucide-react';
+import NotificationDropdown from './NotificationDropdown';
 
 const Navbar = memo(() => {
     const { user, logout } = useContext(AuthContext);
@@ -138,6 +139,7 @@ const Navbar = memo(() => {
                                     </div>
                                 </div>
                             )}
+                            <NotificationDropdown />
                             <button
                                 onClick={handleLogout}
                                 style={{

@@ -1,4 +1,5 @@
 const Appointment = require('../models/appointmentModel');
+const { sendToUser, sendToRole } = require('../socket');
 
 const createAppointment = async (req, res, next) => {
     try {
@@ -14,6 +15,10 @@ const createAppointment = async (req, res, next) => {
         const appointment = await Appointment.create({
             department, doctorName, patientName, patientId: req.user._id, date, timeSlot
         });
+
+        // Emit socket event to all doctor users
+        sendToRole('doctor', 'appointment_booked', appointment);
+
         res.status(201).json(appointment);
     } catch (error) {
         next(error);
@@ -46,6 +51,12 @@ const updateAppointmentStatus = async (req, res, next) => {
         if (appointment) {
             appointment.status = status;
             const updated = await appointment.save();
+
+            // Emit socket event to the patient
+            sendToUser(updated.patientId, 'appointment_status_changed', updated);
+            // Emit socket event to all doctor users (to synchronize other tabs/panels)
+            sendToRole('doctor', 'appointment_status_changed', updated);
+
             res.json(updated);
         } else {
             res.status(404);

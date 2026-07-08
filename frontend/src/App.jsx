@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext';
+import { SocketProvider } from './context/SocketContext';
 import './styles/index.css';
 
 import Login from './pages/Login';
@@ -35,9 +36,10 @@ function App() {
     <>
       {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
       <AuthProvider>
-        <Router>
-          <Navbar />
-          <main style={{ width: '100%' }}>
+        <SocketProvider>
+          <Router>
+            <Navbar />
+            <main style={{ width: '100%' }}>
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
@@ -71,9 +73,10 @@ function App() {
           </main>
           <AuthenticatedChatbot />
         </Router>
-      </AuthProvider>
-    </>
-  );
+      </SocketProvider>
+    </AuthProvider>
+  </>
+);
 }
 
 export default App;

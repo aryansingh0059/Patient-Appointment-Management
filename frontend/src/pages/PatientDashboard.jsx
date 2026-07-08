@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { useSocket } from '../context/SocketContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, User as UserIcon, Stethoscope, Clock } from 'lucide-react';
@@ -53,6 +54,24 @@ const PatientDashboard = () => {
     }, [user.token]);
 
     useEffect(() => { fetchAppointments(); }, [fetchAppointments]);
+
+    const { socket } = useSocket();
+
+    useEffect(() => {
+        if (!socket) return;
+
+        const handleAppointmentUpdate = (updatedApp) => {
+            if (updatedApp.patientId === user._id) {
+                fetchAppointments();
+            }
+        };
+
+        socket.on('appointment_status_changed', handleAppointmentUpdate);
+
+        return () => {
+            socket.off('appointment_status_changed', handleAppointmentUpdate);
+        };
+    }, [socket, user._id, fetchAppointments]);
 
     const stats = {
         total: appointments.length,

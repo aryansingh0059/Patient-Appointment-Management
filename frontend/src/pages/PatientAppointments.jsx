@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { useSocket } from '../context/SocketContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import HospitalBackground from '../components/HospitalBackground';
 
@@ -80,6 +81,24 @@ const PatientAppointments = () => {
     }, [user.token]);
 
     useEffect(() => { fetchAppointments(); }, [fetchAppointments]);
+
+    const { socket } = useSocket();
+
+    useEffect(() => {
+        if (!socket) return;
+
+        const handleAppointmentUpdate = (updatedApp) => {
+            if (updatedApp.patientId === user._id) {
+                fetchAppointments();
+            }
+        };
+
+        socket.on('appointment_status_changed', handleAppointmentUpdate);
+
+        return () => {
+            socket.off('appointment_status_changed', handleAppointmentUpdate);
+        };
+    }, [socket, user._id, fetchAppointments]);
 
     const filtered = appointments.filter(app => {
         if (activeFilter === 'All') return true;
